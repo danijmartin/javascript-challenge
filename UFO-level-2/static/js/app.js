@@ -83,8 +83,40 @@ dateSelected.on("change", function() {
     shapes.forEach(function(shape) {
         d3.select("#shapeSelect").append("option").attr("class", "value").text(shape);
     })
-})
+});
 
+//If country selected, filter all other fields
+countrySelected.on("change", function() {
+    var filterCountry = d3.event.target.value;
+    // console.log(filterCountry); - code testing purposes
+    let filteredData = tableData.filter(country => country.country === filterCountry);
+    // console.log(filteredCountry); - code testing purposes
+    // Empty other options
+    dateSelected.selectAll(".value").remove()
+    stateSelected.selectAll(".value").remove()
+    citySelected.selectAll(".value").remove()
+    shapeSelected.selectAll(".value").remove()
+    // Refill with filtered data
+    let dates = new Set(filteredData.map(date => date.datetime));
+    dates.forEach(function(date) {
+        d3.select("#dateSelect").append("option").attr("class", "value").text(date);
+    })
+
+    let states = new Set(filteredData.map(state => state.state));
+    states.forEach(function(state) {
+        d3.select("#stateSelect").append("option").attr("class", "value").text(state);
+    })
+
+    let cities = new Set(filteredData.map(city => city.city));
+    cities.forEach(function(city) {
+        d3.select("#citySelect").append("option").attr("class", "value").text(city);
+    })
+
+    let shapes = new Set(filteredData.map(shape => shape.shape));
+    shapes.forEach(function(shape) {
+        d3.select("#shapeSelect").append("option").attr("class", "value").text(shape);
+    })
+});
 
 // Activate Filter Button
 
@@ -134,4 +166,4 @@ var button = d3.select("#filter-btn");
 //             cell.text(value);
 //         });
 //     });
-// };
+// }
