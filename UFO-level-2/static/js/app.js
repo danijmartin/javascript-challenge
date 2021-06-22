@@ -13,6 +13,14 @@ tableData.forEach(function(ufoSightings) {
     });
 });
 
+// Build filter options
+var dates = new Set(tableData.map(date => date.datetime));
+console.log(dates)
+dates.forEach(function(date) {
+    d3.select("#dateSelect").append("option").text(date);
+})
+
+
 // Activate Filter Button
 
 // 1. Select Button and Form
