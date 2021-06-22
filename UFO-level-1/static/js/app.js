@@ -12,3 +12,8 @@ tableData.forEach(function(ufoSightings) {
         cell.text(value);
     });
 });
+
+// Activate Filter Button
+
+// 1. Select Button
+var button = d3.select("#filter-btn");
