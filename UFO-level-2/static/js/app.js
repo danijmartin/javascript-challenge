@@ -13,13 +13,36 @@ tableData.forEach(function(ufoSightings) {
     });
 });
 
-// Build filter options
+// Build standard filter options
 var dates = new Set(tableData.map(date => date.datetime));
 console.log(dates)
 dates.forEach(function(date) {
     d3.select("#dateSelect").append("option").text(date);
 })
 
+var countries = new Set(tableData.map(country => country.country));
+console.log(countries)
+countries.forEach(function(country) {
+    d3.select("#countrySelect").append("option").text(country);
+})
+
+var states = new Set(tableData.map(state => state.state));
+console.log(states)
+states.forEach(function(state) {
+    d3.select("#stateSelect").append("option").text(state);
+})
+
+var cities = new Set(tableData.map(city => city.city));
+console.log(cities)
+cities.forEach(function(city) {
+    d3.select("#citySelect").append("option").text(city);
+})
+
+var shapes = new Set(tableData.map(shape => shape.shape));
+console.log(shapes)
+shapes.forEach(function(shape) {
+    d3.select("#shapeSelect").append("option").text(shape);
+})
 
 // Activate Filter Button
 
