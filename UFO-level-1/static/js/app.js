@@ -37,11 +37,21 @@ function filterDate() {
     }
     else 
         {var filteredData = tableData;
-    }
-    console.log(filteredData)
+    };
+    // console.log(filteredData) - Used to check code
 
     // Clear previous table
-    tbody.selectAll('tr').remove()
+    tbody.selectAll('tr').remove();
+
+    // Add note to user if filter comes back empty
+    var userNote = d3.select("#table-area")
+
+    if (filteredData.length === 0) {
+        userNote.append("h5").text("I'm sorry, your filter selection did not match any results. Please check your formatting and date selection and try again.");
+    }
+    else {
+        userNote.select("h5").remove();
+    };
 
     // Rebuild table with filtered Data
     filteredData.forEach(function(ufoSightings) {
@@ -51,6 +61,4 @@ function filterDate() {
             cell.text(value);
         });
     });
-
-
 }
