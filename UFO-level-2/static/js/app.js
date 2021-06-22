@@ -149,6 +149,37 @@ stateSelected.on("change", function() {
     })
 });
 
+//If city selected, filter all other fields
+citySelected.on("change", function() {
+    var filterCity = d3.event.target.value;
+    let filteredData = tableData.filter(city => city.city === filterCity);
+    // Empty other options
+    dateSelected.selectAll(".value").remove()
+    countrySelected.selectAll(".value").remove()
+    stateSelected.selectAll(".value").remove()
+    shapeSelected.selectAll(".value").remove()
+    // Refill with filtered data
+    let dates = new Set(filteredData.map(date => date.datetime));
+    dates.forEach(function(date) {
+        d3.select("#dateSelect").append("option").attr("class", "value").text(date);
+    })
+
+    let countries = new Set(filteredData.map(country => country.country));
+    countries.forEach(function(country) {
+        d3.select("#countrySelect").append("option").attr("class", "value").text(country);
+    })
+
+    let states = new Set(filteredData.map(state => state.state));
+    states.forEach(function(state) {
+        d3.select("#stateSelect").append("option").attr("class", "value").text(state);
+    })
+
+    let shapes = new Set(filteredData.map(shape => shape.shape));
+    shapes.forEach(function(shape) {
+        d3.select("#shapeSelect").append("option").attr("class", "value").text(shape);
+    })
+});
+
 // Activate Filter Button
 
 // 1. Select Button and Form
