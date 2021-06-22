@@ -30,9 +30,56 @@
         <div class="col-md-2">
           <aside class="filters">
             <div class="panel panel-default">
-              <div class="panel-heading">Filter Search</div>
+              <div class="panel-heading">Filter Search (Optional)</div>
               <div class="panel-body">
-                <form>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="dateSelect">Date:</label>
+                  </div>
+                  <select class="custom-select" id="dateSelect">
+                    <option selected>Select a Date...</option>
+                  </select>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="countrySelect">Country</label>
+                  </div>
+                  <select class="custom-select" id="countrySelect">
+                    <option selected>Select a Country...</option>
+                  </select>
+                </div>
+                
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="stateSelect">State</label>
+                  </div>
+                  <select class="custom-select" id="stateSelect">
+                    <option selected>Select a State...</option>
+                  </select>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="citySelect">City</label>
+                  </div>
+                  <select class="custom-select" id="citySelect">
+                    <option selected>Select a City...</option>
+                  </select>
+                </div>
+                
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="shapeSelect">Shape</label>
+                  </div>
+                  <select class="custom-select" id="shapeSelect">
+                    <option selected>Select a Shape...</option>
+                  </select>
+                </div>
+
+                <button id="filter-btn" type="button" class="btn btn-default">Filter Table</button>
+
+                <!-- <form>
                   <div class="form-group">
                     <ul class="list-group" id="filters">
                       <li class="filter list-group-item">
@@ -42,7 +89,7 @@
                     </ul>
                   </div>
                   <button id="filter-btn" type="button" class="btn btn-default">Filter Table</button>
-                </form>
+                </form> -->
               </div>
             </div>
           </aside>
