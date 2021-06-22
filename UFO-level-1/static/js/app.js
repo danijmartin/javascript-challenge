@@ -15,5 +15,8 @@ tableData.forEach(function(ufoSightings) {
 
 // Activate Filter Button
 
-// 1. Select Button
+// 1. Select Button and Form
 var button = d3.select("#filter-btn");
+
+// 2. Create Event Handler
+button.on("click", runEnter);
