@@ -2,7 +2,7 @@
 var tableData = data;
 
 // Get a reference to the table body
-var tbody = d3.select("tbody")
+var tbody = d3.select("tbody");
 
 // Build the table with data stored in data.js
 tableData.forEach(function(ufoSightings) {
@@ -37,7 +37,7 @@ function filterDate() {
     }
     else 
         {var filteredData = tableData;
-    };
+    }
     // console.log(filteredData) - Used to check code
 
     // Clear previous table
@@ -51,7 +51,7 @@ function filterDate() {
     }
     else {
         userNote.select("h5").remove();
-    };
+    }
 
     // Rebuild table with filtered Data
     filteredData.forEach(function(ufoSightings) {
@@ -61,4 +61,4 @@ function filterDate() {
             cell.text(value);
         });
     });
-}
+};
