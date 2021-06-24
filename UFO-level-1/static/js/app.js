@@ -13,7 +13,7 @@ tableData.forEach(function(ufoSightings) {
     });
 });
 
-// Build filter 
+// Build filter search
 let dates = new Set(tableData.map(date => date.datetime));
 // console.log(dates) - code testing purposes
 dates.forEach(function(date) {
@@ -22,11 +22,11 @@ dates.forEach(function(date) {
 
 // Activate Filter Button
 
-// 1. Select Button and Form
-var button = d3.select("#filter-btn");
+// 1. Select filter
+var filter = d3.select("#dateSelect");
 
 // 2. Create Event Handler
-button.on("click", filterDate);
+filter.on("change", filterDate);
 
 // 3. Create the function to run event
 function filterDate() {
