@@ -35,8 +35,11 @@ function filterDate() {
     var inputValue = d3.select("#dateSelect").property("value");
     // console.log(inputValue) - Used to check code
 
-    // Filter data using inputValue if inputValue not empty
-    if (inputValue !== "") {
+    // Prevent the page from refreshing
+    d3.event.preventDefault();
+
+    // Filter data using inputValue if inputValue not default
+    if (inputValue !== "All Dates") {
         var filteredData = tableData.filter(input => input.datetime === inputValue);
     }
     else 
