@@ -13,6 +13,13 @@ tableData.forEach(function(ufoSightings) {
     });
 });
 
+// Build filter 
+let dates = new Set(tableData.map(date => date.datetime));
+// console.log(dates) - code testing purposes
+dates.forEach(function(date) {
+    d3.select("#dateSelect").append("option").attr("class", "value").text(date);
+})
+
 // Activate Filter Button
 
 // 1. Select Button and Form
@@ -24,11 +31,8 @@ button.on("click", filterDate);
 // 3. Create the function to run event
 function filterDate() {
 
-    // Grab input element
-    var inputElement = d3.select(".form-control");
-
     // Get the value property of the input element
-    var inputValue = inputElement.property("value");
+    var inputValue = d3.select("#dateSelect").property("value");
     // console.log(inputValue) - Used to check code
 
     // Filter data using inputValue if inputValue not empty
@@ -42,16 +46,6 @@ function filterDate() {
 
     // Clear previous table
     tbody.selectAll('tr').remove();
-
-    // Add note to user if filter comes back empty
-    var userNote = d3.select("#table-area")
-
-    if (filteredData.length === 0) {
-        userNote.append("h5").text("I'm sorry, your filter selection did not match any results. Please check your formatting and date selection and try again.");
-    }
-    else {
-        userNote.select("h5").remove();
-    }
 
     // Rebuild table with filtered Data
     filteredData.forEach(function(ufoSightings) {
