@@ -58,6 +58,9 @@ var shapeSelect = d3.select("#shapeSelect");
 // Setting default for filteredData
 var filteredData = tableData;
 
+// Setting up reference for result counter:
+var userNote = d3.select("#note-area")
+
 // Setting default values for filters
 var filterDate = "";
 var filterCountry = "";
@@ -126,6 +129,10 @@ dateSelect.on("change", function() {
 
     filteredData = filteredData.filter(date => date.datetime === filterDate);
 
+    // Remove previous note and add note with number of results found
+    userNote.select("h5").remove();
+    userNote.append("h5").text(`Your search currently contains ${filteredData.length} results`);
+
     // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
     countryFilter();
@@ -143,6 +150,10 @@ countrySelect.on("change", function() {
     d3.event.preventDefault();
 
     filteredData = filteredData.filter(country => country.country === filterCountry);
+
+    // Remove previous note and add note with number of results found
+    userNote.select("h5").remove();
+    userNote.append("h5").text(`Your search currently contains ${filteredData.length} results`);
 
     // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
@@ -162,6 +173,10 @@ stateSelect.on("change", function() {
 
     filteredData = filteredData.filter(state => state.state === filterState);
 
+    // Remove previous note and add note with number of results found
+    userNote.select("h5").remove();
+    userNote.append("h5").text(`Your search currently contains ${filteredData.length} results`);
+
     // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
     dateFilter();
@@ -180,6 +195,10 @@ citySelect.on("change", function() {
 
     filteredData = filteredData.filter(city => city.city === filterCity);
 
+    // Remove previous note and add note with number of results found
+    userNote.select("h5").remove();
+    userNote.append("h5").text(`Your search currently contains ${filteredData.length} results`);
+
     // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
     dateFilter();
@@ -197,6 +216,10 @@ shapeSelect.on("change", function() {
     d3.event.preventDefault();
 
     filteredData = filteredData.filter(shape => shape.shape === filterShape);
+
+    // Remove previous note and add note with number of results found
+    userNote.select("h5").remove();
+    userNote.append("h5").text(`Your search currently contains ${filteredData.length} results`);
 
     // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
@@ -219,8 +242,12 @@ function filterTable() {
 
     // Clear previous table
     tbody.selectAll('tr').remove();
+    
+    // Remove previous note and add note with number of results found
+    userNote.select("h5").remove();
+    userNote.append("h5").text(`Your search has yielded ${filteredData.length} results:`);
 
-        // Rebuild table with filtered Data
+    // Rebuild table with filtered Data
     filteredData.forEach(function(ufoSightings) {
         var row = tbody.append("tr");
         Object.entries(ufoSightings).forEach(([key, value]) => {
