@@ -65,6 +65,57 @@ var filterState = "";
 var filterCity = "";
 var filterShape = "";
 
+// Setting functions for event handlers
+function dateFilter() {
+    if (filterDate === "") {
+        dateSelect.selectAll(".value").remove();
+        let dates = new Set(filteredData.map(date => date.datetime));
+        dates.forEach(function(date) {
+            d3.select("#dateSelect").append("option").attr("class", "value").text(date);
+        })
+    }
+};
+
+function countryFilter() {
+    if (filterCountry === "") {
+        countrySelect.selectAll(".value").remove();
+        let countries = new Set(filteredData.map(country => country.country));
+        countries.forEach(function(country) {
+            d3.select("#countrySelect").append("option").attr("class", "value").text(country);
+        })
+    }
+};
+
+function stateFilter() {
+    if (filterState === "") {
+        stateSelect.selectAll(".value").remove();
+        let states = new Set(filteredData.map(state => state.state));
+        states.forEach(function(state) {
+            d3.select("#stateSelect").append("option").attr("class", "value").text(state);
+        })
+    }
+};
+
+function cityFilter() {
+    if (filterCity === "") {
+        citySelect.selectAll(".value").remove();
+        let cities = new Set(filteredData.map(city => city.city));
+        cities.forEach(function(city) {
+            d3.select("#citySelect").append("option").attr("class", "value").text(city);
+        })
+    }
+};
+
+function shapefilter() {
+    if (filterShape === "") {
+        shapeSelect.selectAll(".value").remove();
+        let shapes = new Set(filteredData.map(shape => shape.shape));
+        shapes.forEach(function(shape) {
+            d3.select("#shapeSelect").append("option").attr("class", "value").text(shape);
+        })
+    }
+};
+
 //If date selected, filter all other fields
 dateSelect.on("change", function() {
     filterDate = d3.event.target.value;
@@ -77,37 +128,10 @@ dateSelect.on("change", function() {
 
     // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
-    if (filterCountry === "") {
-        countrySelect.selectAll(".value").remove();
-        let countries = new Set(filteredData.map(country => country.country));
-        countries.forEach(function(country) {
-            d3.select("#countrySelect").append("option").attr("class", "value").text(country);
-        })
-    }
-
-    if (filterState === "") {
-        stateSelect.selectAll(".value").remove();
-        let states = new Set(filteredData.map(state => state.state));
-        states.forEach(function(state) {
-            d3.select("#stateSelect").append("option").attr("class", "value").text(state);
-        })
-    }
-
-    if (filterCity === "") {
-        citySelect.selectAll(".value").remove();
-        let cities = new Set(filteredData.map(city => city.city));
-        cities.forEach(function(city) {
-            d3.select("#citySelect").append("option").attr("class", "value").text(city);
-        })
-    }
-
-    if (filterShape === "") {
-        shapeSelect.selectAll(".value").remove();
-        let shapes = new Set(filteredData.map(shape => shape.shape));
-        shapes.forEach(function(shape) {
-            d3.select("#shapeSelect").append("option").attr("class", "value").text(shape);
-        })
-    }
+    countryFilter();
+    stateFilter();
+    cityFilter();
+    shapefilter();
 });
 
 //If country selected, filter all other fields
@@ -122,37 +146,10 @@ countrySelect.on("change", function() {
 
     // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
-    if (filterDate === "") {
-        dateSelect.selectAll(".value").remove();
-        let dates = new Set(filteredData.map(date => date.datetime));
-        dates.forEach(function(date) {
-            d3.select("#dateSelect").append("option").attr("class", "value").text(date);
-        })
-    }
-
-    if (filterState === "") {
-        stateSelect.selectAll(".value").remove();
-        let states = new Set(filteredData.map(state => state.state));
-        states.forEach(function(state) {
-            d3.select("#stateSelect").append("option").attr("class", "value").text(state);
-        })
-    }
-
-    if (filterCity === "") {
-        citySelect.selectAll(".value").remove();
-        let cities = new Set(filteredData.map(city => city.city));
-        cities.forEach(function(city) {
-            d3.select("#citySelect").append("option").attr("class", "value").text(city);
-        })
-    }
-
-    if (filterShape === "") {
-        shapeSelect.selectAll(".value").remove();
-        let shapes = new Set(filteredData.map(shape => shape.shape));
-        shapes.forEach(function(shape) {
-            d3.select("#shapeSelect").append("option").attr("class", "value").text(shape);
-        })
-    }
+    dateFilter();
+    stateFilter();
+    cityFilter();
+    shapefilter();
 });
 
 //If state selected, filter all other fields
@@ -167,37 +164,10 @@ stateSelect.on("change", function() {
 
     // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
-    if (filterDate === "") {
-        dateSelect.selectAll(".value").remove();
-        let dates = new Set(filteredData.map(date => date.datetime));
-        dates.forEach(function(date) {
-            d3.select("#dateSelect").append("option").attr("class", "value").text(date);
-        })
-    }
-
-    if (filterCountry === "") {
-        countrySelect.selectAll(".value").remove();
-        let countries = new Set(filteredData.map(country => country.country));
-        countries.forEach(function(country) {
-            d3.select("#countrySelect").append("option").attr("class", "value").text(country);
-        })
-    }
-
-    if (filterCity === "") {
-        citySelect.selectAll(".value").remove();
-        let cities = new Set(filteredData.map(city => city.city));
-        cities.forEach(function(city) {
-            d3.select("#citySelect").append("option").attr("class", "value").text(city);
-        })
-    }
-
-    if (filterShape === "") {
-        shapeSelect.selectAll(".value").remove();
-        let shapes = new Set(filteredData.map(shape => shape.shape));
-        shapes.forEach(function(shape) {
-            d3.select("#shapeSelect").append("option").attr("class", "value").text(shape);
-        })
-    }
+    dateFilter();
+    countryFilter();
+    cityFilter();
+    shapefilter();
 });
 
 //If city selected, filter all other fields
@@ -212,37 +182,10 @@ citySelect.on("change", function() {
 
     // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
-    if (filterDate === "") {
-        dateSelect.selectAll(".value").remove();
-        let dates = new Set(filteredData.map(date => date.datetime));
-        dates.forEach(function(date) {
-            d3.select("#dateSelect").append("option").attr("class", "value").text(date);
-        })
-    }
-
-    if (filterCountry === "") {
-        countrySelect.selectAll(".value").remove();
-        let countries = new Set(filteredData.map(country => country.country));
-        countries.forEach(function(country) {
-            d3.select("#countrySelect").append("option").attr("class", "value").text(country);
-        })
-    }
-
-    if (filterState === "") {
-        stateSelect.selectAll(".value").remove();
-        let states = new Set(filteredData.map(state => state.state));
-        states.forEach(function(state) {
-            d3.select("#stateSelect").append("option").attr("class", "value").text(state);
-        })
-    }
-
-    if (filterShape === "") {
-        shapeSelect.selectAll(".value").remove();
-        let shapes = new Set(filteredData.map(shape => shape.shape));
-        shapes.forEach(function(shape) {
-            d3.select("#shapeSelect").append("option").attr("class", "value").text(shape);
-        })
-    }
+    dateFilter();
+    countryFilter();
+    stateFilter();
+    shapefilter();
 });
 
 //If shape selected, filter all other fields
@@ -257,37 +200,10 @@ shapeSelect.on("change", function() {
 
     // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
-    if (filterDate === "") {
-        dateSelect.selectAll(".value").remove();
-        let dates = new Set(filteredData.map(date => date.datetime));
-        dates.forEach(function(date) {
-            d3.select("#dateSelect").append("option").attr("class", "value").text(date);
-        })
-    }
-
-    if (filterCountry === "") {
-        countrySelect.selectAll(".value").remove();
-        let countries = new Set(filteredData.map(country => country.country));
-        countries.forEach(function(country) {
-            d3.select("#countrySelect").append("option").attr("class", "value").text(country);
-        })
-    }
-
-    if (filterState === "") {
-        stateSelect.selectAll(".value").remove();
-        let states = new Set(filteredData.map(state => state.state));
-        states.forEach(function(state) {
-            d3.select("#stateSelect").append("option").attr("class", "value").text(state);
-        })
-    }
-
-    if (filterCity === "") {
-        citySelect.selectAll(".value").remove();
-        let cities = new Set(filteredData.map(city => city.city));
-        cities.forEach(function(city) {
-            d3.select("#citySelect").append("option").attr("class", "value").text(city);
-        })
-    }
+    dateFilter();
+    countryFilter();
+    stateFilter();
+    cityFilter();
 });
 
 // Activate Filter Button
