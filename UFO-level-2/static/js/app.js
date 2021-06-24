@@ -4,6 +4,9 @@ var tableData = data;
 // Get a reference to the table body
 var tbody = d3.select("tbody");
 
+// Setting up reference for result counter:
+var userNote = d3.select("#note-area")
+
 // Build starter page
 function starterPage() {
     // Build the table with data stored in data.js
@@ -14,6 +17,9 @@ function starterPage() {
             cell.text(value);
         });
     });
+
+    // Indicate how many sightings are included in data
+    userNote.append("h5").text(`There have been ${tableData.length} sightings:`);
 
     // Build standard filter options
     let dates = new Set(tableData.map(date => date.datetime));
@@ -57,9 +63,6 @@ var shapeSelect = d3.select("#shapeSelect");
 
 // Setting default for filteredData
 var filteredData = tableData;
-
-// Setting up reference for result counter:
-var userNote = d3.select("#note-area")
 
 // Setting default values for filters
 var filterDate = "";
@@ -119,6 +122,25 @@ function shapefilter() {
     }
 };
 
+function tableFilter() {
+
+    // Remove previous note and add note with number of results found
+    userNote.select("h5").remove();
+    userNote.append("h5").text(`Your search currently contains ${filteredData.length} results:`);
+    
+    // Clear previous table
+    tbody.selectAll('tr').remove();
+    
+    // Rebuild table with filtered Data
+    filteredData.forEach(function(ufoSightings) {
+        var row = tbody.append("tr");
+        Object.entries(ufoSightings).forEach(([key, value]) => {
+            var cell = row.append("td");
+            cell.text(value);
+        });
+    });
+};
+
 //If date selected, filter all other fields
 dateSelect.on("change", function() {
     filterDate = d3.event.target.value;
@@ -129,16 +151,15 @@ dateSelect.on("change", function() {
 
     filteredData = filteredData.filter(date => date.datetime === filterDate);
 
-    // Remove previous note and add note with number of results found
-    userNote.select("h5").remove();
-    userNote.append("h5").text(`Your search currently contains ${filteredData.length} results`);
-
     // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
     countryFilter();
     stateFilter();
     cityFilter();
     shapefilter();
+
+    // Rebuild table
+    tableFilter();
 });
 
 //If country selected, filter all other fields
@@ -151,16 +172,15 @@ countrySelect.on("change", function() {
 
     filteredData = filteredData.filter(country => country.country === filterCountry);
 
-    // Remove previous note and add note with number of results found
-    userNote.select("h5").remove();
-    userNote.append("h5").text(`Your search currently contains ${filteredData.length} results`);
-
     // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
     dateFilter();
     stateFilter();
     cityFilter();
     shapefilter();
+
+    // Rebuild table
+    tableFilter();
 });
 
 //If state selected, filter all other fields
@@ -173,16 +193,15 @@ stateSelect.on("change", function() {
 
     filteredData = filteredData.filter(state => state.state === filterState);
 
-    // Remove previous note and add note with number of results found
-    userNote.select("h5").remove();
-    userNote.append("h5").text(`Your search currently contains ${filteredData.length} results`);
-
-    // console.log(filteredData); - code testing purposes
+        // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
     dateFilter();
     countryFilter();
     cityFilter();
     shapefilter();
+
+    // Rebuild table
+    tableFilter();
 });
 
 //If city selected, filter all other fields
@@ -195,16 +214,15 @@ citySelect.on("change", function() {
 
     filteredData = filteredData.filter(city => city.city === filterCity);
 
-    // Remove previous note and add note with number of results found
-    userNote.select("h5").remove();
-    userNote.append("h5").text(`Your search currently contains ${filteredData.length} results`);
-
-    // console.log(filteredData); - code testing purposes
+        // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
     dateFilter();
     countryFilter();
     stateFilter();
     shapefilter();
+
+    // Rebuild table
+    tableFilter();
 });
 
 //If shape selected, filter all other fields
@@ -217,45 +235,16 @@ shapeSelect.on("change", function() {
 
     filteredData = filteredData.filter(shape => shape.shape === filterShape);
 
-    // Remove previous note and add note with number of results found
-    userNote.select("h5").remove();
-    userNote.append("h5").text(`Your search currently contains ${filteredData.length} results`);
-
-    // console.log(filteredData); - code testing purposes
+        // console.log(filteredData); - code testing purposes
     // Empty other options if event not triggered and refill data
     dateFilter();
     countryFilter();
     stateFilter();
     cityFilter();
+
+    // Rebuild table
+    tableFilter();
 });
-
-// Activate Filter Button
-
-// 1. Select Button and Form
-var button = d3.select("#filter-btn");
-
-// 2. Create Event Handler
-button.on("click", filterTable);
-
-// 3. Create the function to run event
-function filterTable() {
-
-    // Clear previous table
-    tbody.selectAll('tr').remove();
-    
-    // Remove previous note and add note with number of results found
-    userNote.select("h5").remove();
-    userNote.append("h5").text(`Your search has yielded ${filteredData.length} results:`);
-
-    // Rebuild table with filtered Data
-    filteredData.forEach(function(ufoSightings) {
-        var row = tbody.append("tr");
-        Object.entries(ufoSightings).forEach(([key, value]) => {
-            var cell = row.append("td");
-            cell.text(value);
-        });
-    });
-};
 
 // Activate Reset Button
 
